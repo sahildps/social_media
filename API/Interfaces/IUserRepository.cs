@@ -19,4 +19,6 @@ public interface IUserRepository
     Task<IEnumerable<MemberDto>> GetMembersAsync();
 
     Task<MemberDto> GetMemberAsync(string username);
+    
+    // Task AddPhotoAsync(IFormFile file);
 }
