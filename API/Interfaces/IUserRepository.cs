@@ -1,5 +1,6 @@
 ﻿using API.DTOs;
 using API.Entities;
+using API.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Interfaces;
@@ -16,9 +17,9 @@ public interface IUserRepository
 
     Task<AppUser> GetUsersByUsernameAsync(string username);
 
-    Task<IEnumerable<MemberDto>> GetMembersAsync();
+    Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
 
     Task<MemberDto> GetMemberAsync(string username);
     
-    // Task AddPhotoAsync(IFormFile file);
+
 }
