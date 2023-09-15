@@ -24,7 +24,8 @@ public class UsersController : BaseApiController
         _photoService = photoService;
    } 
 
-   
+
+    
    [HttpGet]
    public async Task <ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams){
 
@@ -45,6 +46,7 @@ public class UsersController : BaseApiController
 
 
 
+   
    [HttpGet("{username}")]
    public async Task<ActionResult<MemberDto>> GetUsers(string username){
     return await _userRepository.GetMemberAsync (username);
