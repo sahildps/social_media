@@ -36,6 +36,14 @@ export class MessageService {
       this.messageThreadSource.next(messages);
     });
 
+    this.hubConnection.on('NewMessage', (message) => {
+      this.messageThread$.pipe(take(1)).subscribe({
+        next: (messages) => {
+          this.messageThreadSource.next([...messages, message]);
+        },
+      });
+    });
+
     this.hubConnection.on('UpdatedGroup', (group: Group) => {
       if (group.connections.some((x) => x.username === otherUsername)) {
         this.messageThread$.pipe(take(1)).subscribe({
@@ -50,20 +58,13 @@ export class MessageService {
         });
       }
     });
-
-    this.hubConnection.on('NewMessage', (message) => {
-      this.messageThread$.pipe(take(1)).subscribe({
-        next: (messages) => {
-          this.messageThreadSource.next([...messages, message]);
-        },
-      });
-    });
   }
 
   stopHubConnection() {
     if (this.hubConnection) {
       this.hubConnection?.stop();
     }
+    
   }
 
   getMessages(pageNumber: number, pageSize: number, container: string) {

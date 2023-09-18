@@ -16,7 +16,6 @@ public interface IMessageRepository
 
     Task<IEnumerable<MessageDto>> GetMessageThread(string currentUserName, string recipientUserName);
 
-    Task<bool> SaveAllAsync();
 
     void AddGroup(Group group);
 
